@@ -1,0 +1,33 @@
+INFO:root:Namespace(model_name='POP')
+INFO:root:--------------------------------------------- BEGIN: 2023-07-15 11:55:55 ---------------------------------------------
+INFO:root:
+==============================
+ Arguments       | Values     
+==============================
+ batch_size      | 256       
+ dataset         | LastFM    
+ dropout         | 0         
+ early_stop      | 10        
+ epoch           | 200       
+ eval_batch_size | 256       
+ gpu             |           
+ l2              | 0         
+ lr              | 0.001     
+ num_neg         | 1         
+ num_workers     | 10        
+ optimizer       | Adam      
+ random_seed     | 0         
+ test_all        | 0         
+ topk            | 5,10,20,50
+==============================
+INFO:root:Device: cpu
+INFO:root:Reading data from "../data/", dataset = "LastFM" 
+INFO:root:Counting dataset statistics...
+INFO:root:"# user": 932, "# item": 38441, "# entry": 457554
+INFO:root:Save corpus to ../data/LastFM/BaseReader.pkl
+INFO:root:#params: 0
+INFO:root:POP()
+INFO:root:
+Test After Training: (HR@5:0.1781,NDCG@5:0.1162,HR@10:0.2865,NDCG@10:0.1516,HR@20:0.4056,NDCG@20:0.1814,HR@50:0.6577,NDCG@50:0.2313)
+INFO:root:
+--------------------------------------------- END: 2023-07-15 11:55:57 ---------------------------------------------
