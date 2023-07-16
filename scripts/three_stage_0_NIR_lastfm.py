@@ -51,9 +51,9 @@ u_item_dict = {}
 u_item_p = 0
 for elem in data_ml_100k:
     seq_list = elem[0].split(' | ')
-    for movie in seq_list:
-        if movie not in u_item_dict:
-            u_item_dict[movie] = u_item_p
+    for song in seq_list:
+        if song not in u_item_dict:
+            u_item_dict[song] = u_item_p
             u_item_p +=1
 # print (len(u_item_dict))
 u_item_len = len(u_item_dict)
@@ -62,8 +62,8 @@ user_list = []
 for i, elem in  enumerate(data_ml_100k):
     item_hot_list = [0 for ii in range(u_item_len)]
     seq_list = elem[0].split(' | ')
-    for movie in seq_list:
-        item_pos = u_item_dict[movie]
+    for song in seq_list:
+        item_pos = u_item_dict[song]
         item_hot_list[item_pos] = 1
     user_list.append(item_hot_list)
 user_matrix = np.array(user_list)
@@ -74,10 +74,10 @@ pop_dict = {}
 for elem in data_ml_100k:
     # elem = data_ml_100k[i]
     seq_list = elem[0].split(' | ')
-    for movie in seq_list:
-        if movie not in pop_dict:
-              pop_dict[movie] = 0
-        pop_dict[movie] += 1
+    for song in seq_list:
+        if song not in pop_dict:
+              pop_dict[song] = 0
+        pop_dict[song] += 1
         
         
         
@@ -87,15 +87,15 @@ i_item_user_dict = {}
 i_item_p = 0
 for i, elem in  enumerate(data_ml_100k):
     seq_list = elem[0].split(' | ')
-    for movie in seq_list:
-        if movie not in i_item_user_dict:
+    for song in seq_list:
+        if song not in i_item_user_dict:
             item_hot_list = [0. for ii in range(len(data_ml_100k))]
-            i_item_user_dict[movie] = item_hot_list
-            i_item_dict[movie] = i_item_p
-            i_item_id_list.append(movie)
+            i_item_user_dict[song] = item_hot_list
+            i_item_dict[song] = i_item_p
+            i_item_id_list.append(song)
             i_item_p+=1
-#         item_pos = item_dict[movie]
-        i_item_user_dict[movie][i] += 1
+#         item_pos = item_dict[song]
+        i_item_user_dict[song][i] += 1
 #     user_list.append(item_hot_list)
 i_item_s_list = []
 for item in i_item_id_list:
@@ -142,9 +142,9 @@ def sort_uf_items(target_seq, us, num_u, num_i):
 ### item filtering
 def soft_if_items(target_seq, num_i, total_i, item_matrix_sim, item_dict):
     candidate_songs_dict = {} 
-    for movie in target_seq:
-#         print('ttt:',movie)
-        sorted_is = sorted(list(enumerate(item_matrix_sim[item_dict[movie]])), key=lambda x: x[-1], reverse=True)[:num_i]
+    for song in target_seq:
+#         print('ttt:',song)
+        sorted_is = sorted(list(enumerate(item_matrix_sim[item_dict[song]])), key=lambda x: x[-1], reverse=True)[:num_i]
         for is_i, is_v in sorted_is:
             s_item = i_item_id_list[is_i]
             
@@ -184,7 +184,7 @@ Candidate Set (candidate songs): {}.
 The songs I have listened (listened songs): {}.
 Step 1: What features are most important to me when selecting songs (Summarize my preferences briefly)? 
 Answer: {}.
-Step 2: Selecting the most featured songs from the listened songs according to my preferences (Format: [no. a listened movie.]). 
+Step 2: Selecting the most featured songs from the listened songs according to my preferences (Format: [no. a listened song.]). 
 Answer: 
 """
 
@@ -193,9 +193,9 @@ Candidate Set (candidate songs): {}.
 The songs I have listened (listened songs): {}.
 Step 1: What features are most important to me when selecting songs (Summarize my preferences briefly)? 
 Answer: {}.
-Step 2: Selecting the most featured songs (at most 5 songs) from the listened songs according to my preferences in descending order (Format: [no. a listened movie.]). 
+Step 2: Selecting the most featured songs (at most 5 songs) from the listened songs according to my preferences in descending order (Format: [no. a listened song.]). 
 Answer: {}.
-Step 3: Can you recommend 10 songs from the Candidate Set similar to the selected songs I've listened (Format: [no. a listened movie - a candidate movie])?.
+Step 3: Can you recommend 10 songs from the Candidate Set similar to the selected songs I've listened (Format: [no. a listened song - a candidate song])?.
 Answer: 
 """
 
